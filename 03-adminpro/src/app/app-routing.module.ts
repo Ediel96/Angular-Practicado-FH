@@ -17,8 +17,6 @@ const routes : Routes = [
     { path: '' , redirectTo: '/dashboard', pathMatch:'full' }
   ]},
 
-
-
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
 
@@ -27,7 +25,6 @@ const routes : Routes = [
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     RouterModule.forRoot(routes)
   ],
