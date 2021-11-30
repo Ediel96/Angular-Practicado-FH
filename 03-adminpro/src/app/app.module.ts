@@ -11,18 +11,11 @@ import { PagesModule } from './pages/pages.module';
 import {AuthModule} from './auth/auth.module'
 
 
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
-
-
-
     NopagesfoundComponent,
+
   ],
   imports: [
     BrowserModule,
