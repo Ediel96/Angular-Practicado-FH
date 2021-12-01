@@ -19,4 +19,6 @@ export class ProgressComponent {
     return `${this.pregreso2}%`
   }
 
+
+
 }
