@@ -9,7 +9,9 @@ import { Component } from '@angular/core';
 })
 export class Grafica1Component  {
 
-
-
+  public labels1: string[] = ['Edad 20 - 30', 'Edad 30 - 40', 'Edad 40 - 60'];
+  public data1 = [
+    [30, 40, 120]
+  ];
 
 }
