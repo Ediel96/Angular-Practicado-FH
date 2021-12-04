@@ -3,32 +3,33 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 
+//module
+import { SharedModule } from '../shared/shared.module';
+import { AppRoutingModule } from '../app-routing.module';
+import { ComponentsModule } from '../components/components.module';
+import {RouterModule } from '@angular/router';
 
 // component
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { ProgressComponent } from '../pages/progress/progress.component';
 import { Grafica1Component } from '../pages/grafica1/grafica1.component';
 import { PagesComponent } from '../pages/pages.component';
-
-
-//module
-import { SharedModule } from '../shared/shared.module';
-import { AppRoutingModule } from '../app-routing.module';
-import { ComponentsModule } from '../components/components.module';
-import {RouterModule } from '@angular/router'
+import { AccoutSettingComponent } from './accout-setting/accout-setting.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    AccoutSettingComponent
   ],
   exports: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
+    AccoutSettingComponent
   ],
   imports: [
     CommonModule,
