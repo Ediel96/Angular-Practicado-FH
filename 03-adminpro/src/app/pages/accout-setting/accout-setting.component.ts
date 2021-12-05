@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from '../../services/setting.service'
 
 @Component({
   selector: 'app-accout-setting',
@@ -8,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccoutSettingComponent implements OnInit {
 
-  constructor() { }
+  public linkTheme = document.querySelector('#theme');
+
+  constructor( private settingService : SettingService) { }
 
   ngOnInit(): void {
+    this.settingService.chenckCurrentTheme();
   }
 
+  changeTheme( theme : string){
+    this.settingService.changeTheme(theme)
+  }
+
+  
+  
 }
