@@ -15,6 +15,7 @@ import { ProgressComponent } from '../pages/progress/progress.component';
 import { Grafica1Component } from '../pages/grafica1/grafica1.component';
 import { PagesComponent } from '../pages/pages.component';
 import { AccoutSettingComponent } from './accout-setting/accout-setting.component';
+import { PromesasComponent } from './promesas/promesas.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +23,16 @@ import { AccoutSettingComponent } from './accout-setting/accout-setting.componen
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
-    AccoutSettingComponent
+    AccoutSettingComponent,
+    PromesasComponent
   ],
   exports: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
-    AccoutSettingComponent
+    AccoutSettingComponent,
+    PromesasComponent
   ],
   imports: [
     CommonModule,
