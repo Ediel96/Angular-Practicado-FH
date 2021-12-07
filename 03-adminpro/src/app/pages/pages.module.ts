@@ -16,6 +16,7 @@ import { Grafica1Component } from '../pages/grafica1/grafica1.component';
 import { PagesComponent } from '../pages/pages.component';
 import { AccoutSettingComponent } from './accout-setting/accout-setting.component';
 import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PromesasComponent } from './promesas/promesas.component';
     Grafica1Component,
     PagesComponent,
     AccoutSettingComponent,
-    PromesasComponent
+    PromesasComponent,
+    RxjsComponent
   ],
   exports: [
     DashboardComponent,
