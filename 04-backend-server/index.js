@@ -12,20 +12,11 @@ app.use(cors());
 //Base de datos 
 dbConnection();
 
-//Rutas
+//lectuta y parseo de body
+app.use(express.json());
 
 //Rutas
-
 app.use('/api/usuarios', require('./routes/usuarios'))
-
-// app.get('/', (req, res) => {
-//     res.json({
-//         ok:true,
-//         body:[{
-//             nombre:' hello perras'
-//         }]
-//     })
-// })
 
 
 
