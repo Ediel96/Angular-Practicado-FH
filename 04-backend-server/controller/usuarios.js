@@ -1,6 +1,7 @@
 const Usuario = require('../models/usuario');
 const { response } = require('express');
 const bcrypt = require('bcryptjs');
+const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res) => {
 
@@ -17,8 +18,6 @@ const getUsuarios = async (req, res) => {
 const crearUsuarios = async(req, res= response) => {
     
     const {email, password, nombre} = req.body;
-    
-    console.log(' se paso por huevos la condicional')
 
     try {
 
@@ -41,9 +40,12 @@ const crearUsuarios = async(req, res= response) => {
         //guarda usuario
         await usuario.save();
 
+        const token = await generarJWT(usuario.id);
+
         res.json({
             ok:true,
-            usuario
+            usuario,
+            token
             
         })
 
