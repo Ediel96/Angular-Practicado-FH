@@ -20,4 +20,4 @@ HospitalShema.method('toJSON', function(){
 })
 
 
-module.exports = model('Usuario', HospitalShema)
+module.exports = model('Hospital', HospitalShema)

@@ -24,4 +24,4 @@ MedicoShema.method('toJSON', function(){
 })
 
 
-module.exports = model('Usuario', MedicoShema)
+module.exports = model('Medico', MedicoShema)
