@@ -13,14 +13,16 @@ const { validarCampos } = require('../middlewares/validar-campos')
 
 
 const {getHopitales, crearHopitales, actualizarHopitales, borrarHopitales } = require('../controller/hospitales')
-// const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarJWT } = require('../middlewares/validar-jwt');
 
 const router = Router();
 
-router.get('/',  getHopitales);
+router.get('/',[validarJWT],  getHopitales);
 
 router.post('/' ,
     [
+        validarJWT,
+        check('nombre', 'El nombre del hospital es necesario').not().isEmpty(),
     ],
     crearHopitales
 );

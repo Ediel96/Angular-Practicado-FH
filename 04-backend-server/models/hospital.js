@@ -9,6 +9,7 @@ const HospitalShema = Schema({
         type: String,
     },
     usuario: {
+        require: true,
         type: Schema.Types.ObjectId,
         ref:'Usuario'
     }

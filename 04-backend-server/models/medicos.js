@@ -10,13 +10,15 @@ const MedicoShema = Schema({
     },
     usuario: {
         type: Schema.Types.ObjectId,
-        ref:'Usuario'
+        ref:'Usuario',
+        required: true
     },
     hospital: {
         type: Schema.Types.ObjectId,
-        ref:'Hospital'
+        ref:'Hospital',
+        required: true
     }
-},{collection: 'hospitales'})
+},{collection: 'medicos'})
 
 MedicoShema.method('toJSON', function(){
     const {__v,  ...object} = this.toObject();
@@ -24,4 +26,4 @@ MedicoShema.method('toJSON', function(){
 })
 
 
-module.exports = model('Medico', MedicoShema)
+module.exports = model('Medico', MedicoShema);
