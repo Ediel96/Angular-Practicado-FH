@@ -16,11 +16,11 @@ dbConnection();
 app.use(express.json());
 
 //Rutas
+app.use('/api/todos', require('./routes/busquedas'));
 app.use('/api/usuarios', require('./routes/usuarios'));
 app.use('/api/hospitales', require('./routes/hospitales'));
 app.use('/api/medicos', require('./routes/medicos'));
 app.use('/api/login', require('./routes/auth'));
-
 
 
 
