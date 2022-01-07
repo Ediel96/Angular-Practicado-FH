@@ -3,6 +3,8 @@ const Usuario = require('../models/usuario');
 
 const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
+const { googleVerify } = require('../helpers/google-verify');
+
 
 const login = async (req, res = response, next) => {
 
@@ -44,6 +46,67 @@ const login = async (req, res = response, next) => {
     }
 }
 
+const googleSingIn = async (req, res = response) => {
+
+    const googleToken = req.body.token;
+
+
+    try {
+        const {name, email, picture}  = await googleVerify( googleToken );
+
+        //verificar si el usuario existe 
+        const usuarioDB = await Usuario.findOne({ email });
+        let usuario;
+
+        console.log('usuario Existe : ' , !usuarioDB)
+        if(!usuarioDB){
+            usuario = new Usuario( {
+                nombre: name, 
+                email, 
+                password: '@@@',
+                picture,
+                img: picture,
+                google: true
+            })
+        }else{
+            //existe usuario 
+            usuario = usuarioDB;
+            usuario.google = true;
+        }
+
+        console.log('usuario guardar', usuario);
+        //Guardar en DB
+        const usuarioAct= await usuario.save();
+
+        console.log('generar el token : ', usuarioAct)
+        // Generar el TOKEN - JWT
+        const token = await generarJWT(usuarioDB._id);
+
+        return res.json({
+            ok:true,
+            token
+        })
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const renewToken = async (req, res = response) => {
+
+    const uid = req.uid;
+
+    //Generar el Token
+    const token = await generarJWT(uid);
+
+    res.json({
+        ok:true,
+        token
+    })
+}
+
 module.exports={
-    login
+    login,
+    googleSingIn,
+    renewToken
 }
