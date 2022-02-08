@@ -29,3 +29,10 @@
     right: 0px;
     position: absolute;
     height: 100%; }
+
+
+
+input[type="checkbox"] {
+  position: static;
+  opacity:unset;
+}
