@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators,  FormGroup, AbstractControl, } from '@angular/forms';
-import { UsuarioService } from '../../services/usuario.service';
+import { Router } from '@angular/router';
 
+import { UsuarioService } from '../../services/usuario.service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-register',
@@ -14,15 +16,19 @@ export class RegisterComponent implements OnInit{
   form! : FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private usuarioServ : UsuarioService) { }
+  constructor(
+      private formBuilder: FormBuilder, 
+      private usuarioServ : UsuarioService,
+      private route: Router
+    ) 
+    { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        nombre: ['example22', Validators.required],
-        email: ['example22@gmail.com',[Validators.email,]],
-        password: ['example221', [Validators.required, Validators.required]],
-        // password2: ['',[Validators.required,]],
+        nombre: ['tes17', Validators.required],
+        email: ['tes17@gmail.com', Validators.email,],
+        password: ['1234567', Validators.required],
         terminos: [false, Validators.requiredTrue]
       }
     );
@@ -35,20 +41,26 @@ export class RegisterComponent implements OnInit{
   onSubmit(): void {
     this.submitted = true;
 
-    console.log('form : ',this.form.value);
-    console.log('respuesta valida: ',this.form.invalid);
-
-
     if (this.form.invalid) {
       return;
     }
 
-    console.log(this.form.value, null, 2);
-
     this.usuarioServ.crearUsuario(this.form.value).subscribe(res => {
-      console.log('respuesta: ',res)
+      this.route.navigate(['/login'])
+      Swal.fire({
+        icon: 'success',
+        title: 'Registro exitosos',
+        timer: 1500
+      })
+
     },
-    (err) => console.warn(err)
+    (err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `${err.error.msg}`,
+      })
+      }
     )
   }
 

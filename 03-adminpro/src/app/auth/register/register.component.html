@@ -7,8 +7,7 @@
         <div class="card-body">
 
             <form class="form-horizontal form-material"
-            id="loginform"
-            autocomplete="on"
+            autocomplete="off"
             [formGroup]="form"
             (ngSubmit)="onSubmit()">
 
@@ -72,9 +71,11 @@
                                 [ngClass]="{ 'is-invalid': submitted && f.terminos.errors }"
                                 formControlName="terminos">
 
+                                <label for="terminos" class="form-check-label">I have read and agree to the Terms</label>
+
                                 <div *ngIf="submitted && f.terminos.errors" class="invalid-feedback">
-                                  Accept Terms is required
-                                </div>
+                                    Accept Terms is required
+                                  </div>
                                 <label for="checkbox-signup"> I agree to all <a href="#">Terms</a></label>
                           <!-- terminos -->
                             <!-- <input
