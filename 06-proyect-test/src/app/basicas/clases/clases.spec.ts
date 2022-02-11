@@ -30,6 +30,7 @@ describe('Prueba de clase', ()=>{
         expect( resp ).toBe(80)
     })
 
+    // xit satar una prueba o xdescribe
     it('Debe de retorna 50 de hp, si recibe 50 de daño',() => {
         // const jugador = new Jugador();
         const resp = jugador.recibeDanio(50);
