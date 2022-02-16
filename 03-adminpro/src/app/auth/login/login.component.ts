@@ -47,14 +47,21 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    console.log('login', this.form.value)
+
     this.usuarioServ.loginUsuario(this.form.value).subscribe(res => {
-      console.log(res)
+
+      console.log('login',res);
+      Swal.fire('Success', 'Login exitoso', 'success');
+      this.router.navigate(['/']);
+
     },err => {
-      Swal.fire('Error', err.error.msg, 'error')
+      console.warn(err);
+      Swal.fire('Error', err.error.msg, 'error');
     });
 
-    console.log('formulario : ',this.form.value);
-    // this.router.navigate(['/dashboard'])
+    // console.log('formulario : ',this.form.value);
+    
   }
 
   onSucces(googleUser : any) {

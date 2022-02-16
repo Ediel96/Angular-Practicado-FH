@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit{
     }
 
     this.usuarioServ.crearUsuario(this.form.value).subscribe(res => {
-      this.route.navigate(['/login'])
+      this.route.navigate(['/'])
       Swal.fire({
         icon: 'success',
         title: 'Registro exitosos',
