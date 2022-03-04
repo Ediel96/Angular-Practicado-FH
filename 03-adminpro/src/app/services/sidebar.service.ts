@@ -10,6 +10,7 @@ export class SidebarService {
       titulo : 'Dashboard',
       icono: 'mdi mdi-gauge',
       submenu:[
+        {titulo : 'My Perfil', url: './perfil'},
         {titulo : 'Main', url: '/'},
         {titulo : 'ProgressBar', url: 'progress'},
         {titulo : 'Grafica', url: 'grafica1'},

@@ -9,12 +9,17 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { Usuario } from '../models/usuario.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 const base_url = environment.base_url;
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsuarioService {
+
+    public usuario? : Usuario;
 
     constructor(
             private http: HttpClient, 
@@ -27,16 +32,38 @@ export class UsuarioService {
 
     }
 
+    get token(): string {
+        return localStorage.getItem('token') || '';
+    }
+
+    get uid():string{
+        return this.usuario?.uid || '';
+    }
+
     validarToken(): Observable<boolean>{
-        const token = localStorage.getItem('token') || '';
         
         return this.http.get(`${base_url}/login/renew`,{
             headers:{
-                'x-token':token
+                'x-token':this.token
             }
         }).pipe(
-            tap(( res:any ) => {
-                localStorage.setItem('token', res.token)
+            map(( res:any ) => {
+            
+                const {
+                     email,
+                     google,
+                     nombre,
+                     role,
+                     img = '',
+                     uid
+                } = res.usuariodb; 
+
+                this.usuario = new Usuario(nombre , email, '', img, google, role, uid);
+                
+                // this.usuario.imprimirUsuario();
+                localStorage.setItem('token', res.token);
+                
+                return true;
             }),
             map(res => true),
             catchError(error => of(false))
@@ -46,6 +73,20 @@ export class UsuarioService {
 
     crearUsuario(formData : RegisterForm){
         return this.http.post(`${base_url}/usuarios`, formData);
+    }
+
+
+    actualizarPerfil(data: { email: string, nombre : string, role : string}){
+
+        data = {
+            ...data
+        };
+
+        return this.http.put(`${base_url}/usuarios/${this.uid}`, data, {headers:{
+            'x-token':this.token
+            }
+        });
+
     }
 
     loginUsuario(formData : any){
