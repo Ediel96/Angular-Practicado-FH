@@ -6,6 +6,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 import { Usuario } from 'src/app/models/usuario.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -53,14 +54,19 @@ export class PerfilComponent implements OnInit {
       return;
     }
 
-    this.usuarioServ.actualizarPerfil(this.form.value)
-      .subscribe(res => {
-        const {nombre , email} = this.form.value;
+    this.usuarioServ
+      .actualizarPerfil(this.form.value)
+        .subscribe(res => {
+          const {nombre , email} = this.form.value;
 
-        this.usuario!.nombre = nombre;
-        this.usuario!.email = email;
-        console.log(res);
-      })
+          this.usuario!.nombre = nombre;
+          this.usuario!.email = email;
+          
+            Swal.fire('Guardado','Cambios fueron guardados','success');
+        },(err) =>{
+          console.log(err);
+            Swal.fire('Error','Y aexite un correo con el mismo usuario.')
+        })
   }
 
   cambiarImagen(event:any): any | undefined{
@@ -84,6 +90,9 @@ export class PerfilComponent implements OnInit {
     this.fileUploadServ
       .actualizarFoto(this.imageSubir!, 'usuarios', this.usuario?.uid!)
       .then(img => this.usuario!.img = img);
+
+      Swal.fire('Guardado','Imagen de usuario actulizado','success');
+
   }
 
 }
