@@ -1,9 +1,11 @@
 const { response } = require('express');
-const Usuario = require('../models/usuario');
 
 const bcrypt = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
 const { googleVerify } = require('../helpers/google-verify');
+
+const Usuario = require('../models/usuario');
+
 
 
 const login = async (req, res = response, next) => {
@@ -99,9 +101,13 @@ const renewToken = async (req, res = response) => {
     //Generar el Token
     const token = await generarJWT(uid);
 
+    //obtener Usurio
+    const usuariodb = await Usuario.findById(uid);
+
     res.json({
         ok:true,
-        token
+        token,
+        usuariodb
     })
 }
 
