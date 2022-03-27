@@ -18,9 +18,13 @@ export class Usuario {
     get imagenUrl(){
         // /upload/usuarios/29796c7d-d98b-4703-8c7d-1bc833c80ef8.jpg
 
-        if(this.img){
+        // debugger;/
+        
+        if(!this.img){
+            return `${base_url}/upload/usuarios/no-imagen`;
+        }else if(this.img){
             return `${base_url}/upload/usuarios/${this.img}`;
-        }else{
+        }else {
             return `${base_url}/upload/usuarios/no-imagen`;
         }
 

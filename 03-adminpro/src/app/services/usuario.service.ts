@@ -5,12 +5,14 @@ import { environment } from '../../environments/environment';
 
 import { LoginForm } from '../interfaces/login-form.interfaces';
 import { RegisterForm } from '../interfaces/register-form.interfaces';
-import { catchError, map, tap } from 'rxjs/operators';
+import { CargaUsuario } from '../interfaces/cargar-usuarios.interfaces';
+
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { Usuario } from '../models/usuario.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 const base_url = environment.base_url;
 
@@ -38,6 +40,13 @@ export class UsuarioService {
 
     get uid():string{
         return this.usuario?.uid || '';
+    }
+
+    get headers(){
+        return {headers:{
+            'x-token':this.token
+            }
+        }
     }
 
     validarToken(): Observable<boolean>{
@@ -98,4 +107,25 @@ export class UsuarioService {
         );
     }
 
+    cargaUsuarios(desde : number = 0) : any{
+        const url = `${base_url}/usuarios/?desde=${desde}`;
+        return this.http.get<[any]>(url, this.headers)
+            .pipe(
+                // delay(5000),
+                map((resp : any)=> {
+                    const usuarios = resp.usuarios
+                        .map( (user: { nombre: string; email: string;  img: string | undefined; google: string | undefined; role: string | undefined; uid: string | undefined;  }
+                            ) => new Usuario(user.nombre , user.email, '',user.img, user.google, user.role , user.uid));
+                    return {
+                        total : resp.total,
+                        usuarios
+                    }
+                })
+            );
+    }
+
+    eliminarUsuario(usuario : Usuario){
+        const url = `${base_url}/api/usuarios/${usuario.uid}`;
+        
+    }
 }
