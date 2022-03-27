@@ -20,6 +20,25 @@
   height: 200px;
 }
 
+.w140{
+  height: 140px;
+}
+
 .w100{
   height: 100px;
+}
+
+.fondo-modal-imagen{
+  background-color: rgba(0, 0, 0, 0.4);
+  left: 0px;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 9999;
+}
+
+.modalOpen{
+  display: none;
+  padding-right: 17px;
 }

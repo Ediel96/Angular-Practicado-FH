@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { Usuario } from '../models/usuario.model';
+import Swal from 'sweetalert2';
 
 
 const base_url = environment.base_url;
@@ -88,7 +89,8 @@ export class UsuarioService {
     actualizarPerfil(data: { email: string, nombre : string, role : string}){
 
         data = {
-            ...data
+            ...data,
+            // role: this.usuario?.role
         };
 
         return this.http.put(`${base_url}/usuarios/${this.uid}`, data, {headers:{
@@ -125,7 +127,17 @@ export class UsuarioService {
     }
 
     eliminarUsuario(usuario : Usuario){
-        const url = `${base_url}/api/usuarios/${usuario.uid}`;
-        
+        const url = `${base_url}/usuarios/${usuario.uid}`;
+        return this.http.delete(url, this.headers)
+    }
+
+
+    actualizarPerfilRole(usuario : Usuario){
+
+        return this.http.put(`${base_url}/usuarios/${usuario.uid}`, usuario, {headers:{
+            'x-token':this.token
+            }
+        });
+
     }
 }

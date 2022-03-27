@@ -66,6 +66,11 @@ export class UsuariosComponent implements OnInit {
   }
 
   eliminar( usuario : Usuario){
+
+    if( usuario.uid === this.usuariosServ.uid){
+      Swal.fire('Error', 'No puede borrarse a si mismo', 'error');
+      return;
+    }
     
     Swal.fire({
       title: 'Borra usuarios?',
@@ -77,17 +82,27 @@ export class UsuariosComponent implements OnInit {
       if (result.isConfirmed) {
 
         this.usuariosServ.eliminarUsuario( usuario )
-
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+          .subscribe( res=> {
+            Swal.fire(
+              'Usuario borrador',
+              `${usuario.nombre} fue eliminado correctamente`,
+              'success'
+            )
+            this.cargarUsuarios();
+          })
       }
     })
 
   }
 
+
+  cambiarRole( usuario : Usuario ){
+    this.usuariosServ.actualizarPerfilRole(usuario).subscribe(
+      resp => {
+        console.log(resp)
+      }
+    )
+  }
 
 
 }
