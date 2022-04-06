@@ -1,6 +1,6 @@
 
 <div class="fondo-modal-imagen animated fadeIn fast"
-    [ngClass]="{'fondo-modal-imagen' : ocultarModal === false}">
+    [ngClass]="{'fondo-modal-imagen' : modalImagenServices.ocultarModal === false}">
 
     <div class="modal fade show" 
         id="exampleModal" 
@@ -8,7 +8,7 @@
         role="dialog" 
         aria-labelledby="exampleModalLabel1 modal modalOpen" 
         style="display: block; padding-right: 17px;"
-        *ngIf="!ocultarModal">
+        *ngIf="!modalImagenServices.ocultarModal">
 
         <div class="modal-dialog" role="document">
             <div class="modal-content">

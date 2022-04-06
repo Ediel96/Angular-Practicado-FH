@@ -20,10 +20,11 @@ export class Usuario {
 
         // debugger;/
         
-        if(!this.img){
-            return `${base_url}/upload/usuarios/no-imagen`;
-        }else if(this.img){
+        if(this.img){
+            console.log(this.img)
             return `${base_url}/upload/usuarios/${this.img}`;
+        }else if(!this.img){
+            return `${base_url}/upload/usuarios/no-imagen`;
         }else {
             return `${base_url}/upload/usuarios/no-imagen`;
         }

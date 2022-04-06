@@ -5,6 +5,10 @@ import { CargaUsuario } from 'src/app/interfaces/cargar-usuarios.interfaces';
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import Swal from 'sweetalert2';
+import { ModalImagenService } from '../../../services/modal-imagen.service';
+import { environment } from '../../../../environments/environment';
+
+const base_url = environment.base_url;
 
 
 
@@ -20,10 +24,12 @@ export class UsuariosComponent implements OnInit {
   public usuarios? : Usuario[]; 
   public desde : number = 0;
   public cargando : boolean = true;
+  public base_url : string = base_url;
 
   constructor(
     private usuariosServ : UsuarioService,
-    private busquedaService : BusquedasService
+    private busquedaService : BusquedasService,
+    private modalImagenService : ModalImagenService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +42,7 @@ export class UsuariosComponent implements OnInit {
       .cargaUsuarios( this.desde ).subscribe( ( resp:any ) => { 
         this.totalUsuario = resp.total;
         this.usuarios =  resp.usuarios;
+        console.log('usuarios: ', this.usuarios)
         this.cargando = false;
       });
   }
@@ -93,6 +100,10 @@ export class UsuariosComponent implements OnInit {
       }
     })
 
+  }
+
+  abrirModal(){
+    this.modalImagenService.abrirModal()
   }
 
 

@@ -8,7 +8,8 @@ import { NopagesfoundComponent } from './nopagesfound/nopagesfound.component';
 
 //Modulos
 import { PagesModule } from './pages/pages.module';
-import {AuthModule} from './auth/auth.module'
+import {AuthModule} from './auth/auth.module';
+import { ImgPipe } from './pipes/img.pipe'
 
 
 @NgModule({
