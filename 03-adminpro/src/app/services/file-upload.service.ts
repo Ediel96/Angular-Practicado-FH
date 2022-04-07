@@ -13,7 +13,7 @@ export class FileUploadService {
   async actualizarFoto(
     archivo : File,
     tipo: 'usuarios'| 'medicos' | 'hopitales', 
-    id : string): Promise<any | undefined>{
+    id?: string): Promise<any | undefined>{
     
     try {
 

@@ -86,13 +86,11 @@ export class PerfilComponent implements OnInit {
   }
 
   subirImagen(){
-    console.log(this.imageSubir!);
     this.fileUploadServ
       .actualizarFoto(this.imageSubir!, 'usuarios', this.usuario?.uid!)
       .then(img => this.usuario!.img = img);
 
       Swal.fire('Guardado','Imagen de usuario actulizado','success');
-
   }
 
 }
