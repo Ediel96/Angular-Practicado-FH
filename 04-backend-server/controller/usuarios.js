@@ -9,7 +9,7 @@ const getUsuarios = async (req, res) => {
 
     const [ usuarios , total ] = await Promise.all([
         Usuario
-            .find({}, 'nombre email role google')
+            .find({}, 'nombre email img role google')
             .skip(pagina)
             .limit(5),
         
